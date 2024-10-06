@@ -15,6 +15,8 @@ public class Estacionamento {
     public double calcularValor() {
         Duration duracao = Duration.between(entrada, saida);
         long minutos = duracao.toMinutes();
+        int in = entrada.getDayOfMonth();
+        int out = saida.getDayOfMonth();
 
         if (minutos <= 15) {
             return 0.0;
@@ -28,7 +30,7 @@ public class Estacionamento {
             long horas = minutos / 60;
             valor = 5.90 + (horas - 1) * 2.50;
 
-            if (saida.getHour() >= 8) {
+            if (saida.getHour() >= 8 && in != out) {
                 valor = 50.0;
             }
         }
