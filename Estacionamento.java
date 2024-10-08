@@ -26,13 +26,19 @@ public class Estacionamento {
             valor = 5.90;
         } else {
             long horas = minutos / 60;
+            long minutosRestantes = minutos % 60;
+            
             valor = 5.90 + (horas - 1) * 2.50;
-
-            if (saida.getHour() >= 8) {
+            
+            if (minutosRestantes > 0) {
+                valor += 2.50;
+            }
+        
+            if (saida.toLocalDate().isAfter(entrada.toLocalDate()) && saida.getHour() >= 8) {
                 valor = 50.0;
             }
         }
-
+        
         if (isVIP) {
             valor *= 0.5;
         }
